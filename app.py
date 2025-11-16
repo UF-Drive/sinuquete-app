@@ -3,15 +3,21 @@ from flask_cors import CORS
 import database
 import unicodedata
 
+# --- MUDANÇA CRÍTICA AQUI ---
+# O comando abaixo agora roda SEMPRE, seja no seu PC ou no Render.
+# Isso garante que o banco e as tabelas sejam criados antes do site ligar.
+database.init_db()
+# ----------------------------
+
 app = Flask(__name__, static_url_path='', static_folder='.')
 CORS(app)
 
-# Função para transformar "Zé" em "ze", "Augusto" em "augusto"
+# Função para transformar "Zé" em "ze"
 def slugify(texto):
     return ''.join(c for c in unicodedata.normalize('NFD', texto)
                   if unicodedata.category(c) != 'Mn').lower()
 
-# --- CONFIGURAÇÕES DO JOGO (Fácil de editar aqui!) ---
+# --- CONFIGURAÇÕES DO JOGO ---
 AMIGOS_LISTA = ['Augusto', 'Daniel', 'Fernanda', 'Zé', 'Rafael']
 
 LOCAIS_PRECOS = [
@@ -24,16 +30,13 @@ LOCAIS_PRECOS = [
 # Rota Principal
 @app.route('/')
 def home():
-    # Prepara os dados para o HTML
     amigos_dados = []
     for nome in AMIGOS_LISTA:
         amigos_dados.append({
             'nome': nome,
-            'id': slugify(nome), # gera "ze", "daniel"...
-            'css_class': f'card-{slugify(nome)}' # gera "card-ze"...
+            'id': slugify(nome),
+            'css_class': f'card-{slugify(nome)}'
         })
-    
-    # Envia tudo para o template renderizar
     return render_template('index.html', amigos=amigos_dados, locais=LOCAIS_PRECOS)
 
 # API - Totais
@@ -57,5 +60,5 @@ def resetar_tudo():
     return jsonify({'mensagem': 'Tudo limpo!'})
 
 if __name__ == '__main__':
-    database.init_db()
+    # A linha init_db() foi removida daqui e colocada no topo
     app.run(debug=True, port=5000)
