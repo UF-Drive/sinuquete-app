@@ -1,0 +1,627 @@
+/* ================================
+   1. GERAL E HEADER
+   ================================ */
+
+/* MUDANÇA: Adicione isso bem no topo! */
+/* Garante que o padding não aumente o tamanho total dos elementos */
+* {
+    box-sizing: border-box;
+}
+
+/* Reseta e define o fundo */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+        Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* O fundo cinza claro */
+}
+
+/* --- O HEADER "MAGNÍFICO" --- */
+.site-header {
+    /* Barra de 100% de largura */
+    width: 100%;
+    
+    /* --- "MOLHO" (GRADIENTE) --- */
+    background: linear-gradient(180deg, #1565C0 0%, #0D47A1 100%); /* De um azul mais claro para o original */
+    
+    /* --- SOMBRA FORTE --- */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra mais escura e maior */
+
+    /* --- PRÉ-REQUISITOS PARA O "MOLHO" --- */
+    position: relative; /* Necessário para o pseudo-elemento */
+    overflow: hidden; /* Esconde o que "vazar" do gradiente de brilho */
+    color: white;
+}
+
+/* --- O "MOLHO" DO HEADER (EFEITO GLOSSY) --- */
+.site-header::after {
+    content: '';
+    position: absolute;
+    top: -30%; /* Posição do brilho */
+    left: -30%;
+    width: 160%; /* Tamanho do brilho */
+    height: 160%;
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.1) 0%, /* Brilho sutil */
+        rgba(255, 255, 255, 0.0) 50% /* Transparente */
+    );
+    transform: rotate(25deg); /* Ângulo do brilho */
+    pointer-events: none; /* Permite clicar "através" do brilho */
+}
+
+
+/* --- O CENTRO DO HEADER (LOGO + TÍTULO) --- */
+.logo-container {
+    /* Define a largura máxima do conteúdo, alinhado com os cards */
+    max-width: 1600px; 
+    margin: 0 auto; /* Centraliza o container */
+    padding: 20px 30px;
+    
+    /* Alinhamento do logo e título */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* CENTRALIZA O CONTEÚDO */
+}
+
+.logo-img {
+    height: 40px;
+    width: 40px;
+    margin-right: 15px;
+}
+
+.titulo {
+    font-size: 2.2rem; /* Um pouco maior */
+    font-weight: 700;
+    margin: 0;
+    
+    /* --- "MOLHO" (GLOW/BRILHO) --- */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); /* Um brilho branco sutil */
+}
+
+/* ================================
+   2. CONTAINER PRINCIPAL (DOS CARDS)
+   ================================ */
+
+.container-principal {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards quebrem a linha */
+    justify-content: center; /* Centraliza os cards */
+    
+    gap: 25px; /* Espaço entre os cards */
+    
+    /* 40px em cima e embaixo, 20px nos lados */
+    padding: 40px 20px 40px 20px; 
+    
+    max-width: 1600px; /* Largura máxima (a mesma do header) */
+    margin: 0 auto; /* Centraliza o container na página */
+}
+
+/* ================================
+   3. CARD DE AMIGO
+   ================================ */
+
+.amigo-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+    
+    /* Define o tamanho dos cards */
+    min-width: 300px; /* Largura mínima */
+    max-width: 350px; /* Largura máxima */
+    flex-grow: 1; /* Permite que cresça se houver espaço */
+    
+    padding: 25px;
+    text-align: center;
+    
+    /* Organiza os itens internos verticalmente */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os itens (Nome, Total, Botões...) */
+
+    /* Borda transparente para o efeito "top-spender" não "pular" */
+    border: 3px solid transparent; 
+    
+    /* A borda superior agora é mais grossa para mostrar a cor */
+    border-top-width: 6px; 
+    
+    /* --- EFEITO 1: FLUTUAR --- */
+    transition: all 0.2s ease-out;
+}
+
+/* --- CORES PERSONALIZADAS DOS AMIGOS --- */
+.card-augusto {
+    border-top-color: #CE93D8; /* Roxo Claro (Lilás) */
+}
+.card-daniel {
+    border-top-color: #7B1FA2; /* Roxo Forte */
+}
+.card-fernanda {
+    border-top-color: #556B2F; /* Verde Musgo */
+}
+.card-ze {
+    border-top-color: #4169E1; /* Azul Royal */
+}
+.card-rafael {
+    border-top-color: #212121; /* Preto (um cinza bem escuro pra ficar chique) */
+}
+
+
+/* --- EFEITO 1: FLUTUAR (HOVER) --- */
+.amigo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* --- EFEITO "TOP SPENDER" (BORDA DOURADA) --- */
+.amigo-card.top-spender {
+    /* Ouro ganha de tudo! (Sobrepõe a cor favorita) */
+    border-color: #FFD700;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+}
+
+
+/* ================================
+   4. ELEMENTOS INTERNOS DO CARD
+   ================================ */
+
+/* 1. Nome (fonte grande) */
+.nome-amigo {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* Esconde o troféu por padrão */
+.nome-amigo .trophy-icon {
+    display: none;
+    font-size: 1.2rem;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* Mostra o troféu no "top-spender" */
+.amigo-card.top-spender .nome-amigo .trophy-icon {
+    display: inline;
+}
+
+
+/* 2. Total gasto (fonte média) */
+.total-gasto {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1565C0; /* Azul principal */
+    background-color: #f4f7f6; /* Fundo cinza claro */
+    margin: 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* 3. Grupo dos botões de local */
+.botoes-local {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebrar a linha em telas pequenas */
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Botão de local individual */
+.btn-local {
+    border: 2px solid #0D47A1;
+    background: transparent;
+    color: #0D47A1;
+    padding: 8px 12px;
+    border-radius: 20px; /* Arredondado */
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    
+    /* --- EFEITO 2 & 3: TRANSIÇÃO SUAVE --- */
+    transition: all 0.2s ease;
+}
+
+/* --- EFEITO 2: PRESSIONAR (HOVER) --- */
+.btn-local:hover {
+    background: #e3f2fd; /* Azul bem clarinho */
+}
+
+/* --- EFEITO 2: PRESSIONAR (ACTIVE) --- */
+.btn-local:active {
+    transform: scale(0.95); /* Afunda o botão */
+}
+
+/* --- EFEITO 3: BOTÃO SELECIONADO --- */
+.btn-local.selecionado {
+    background: #0D47A1; /* Fundo azul sólido */
+    color: white; /* Texto branco */
+}
+
+
+/* 4. Espaço que mostra o valor */
+.preco-local {
+    min-height: 1.2em; /* Garante altura (mesmo vazio) */
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+}
+
+/* 5. Controle de partida (+ e -) */
+.controle-partida {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px; /* Um espaço extra em cima */
+}
+
+/* Botões de + e - */
+.btn-acao {
+    background: #eee;
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Redondo */
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #333;
+    cursor: pointer;
+    display: flex;           /* Garante centralização */
+    align-items: center;     /* Centraliza vertical */
+    justify-content: center; /* Centraliza horizontal */
+    
+    /* MUDANÇA: Adiciona 4px de padding em baixo para "levantar" o símbolo visualmente */
+    padding-bottom: 4px;
+    
+    /* --- EFEITO 2: TRANSIÇÃO SUAVE --- */
+    transition: all 0.2s ease;
+}
+
+/* --- EFEITO 2: PRESSIONAR (ACTIVE) --- */
+.btn-acao:active {
+    transform: scale(0.9); /* Afunda mais */
+}
+
+.btn-menos:hover {
+    background: #ffebee; /* Vermelho claro */
+    color: #c62828; /* Vermelho escuro */
+}
+.btn-mais:hover {
+    background: #e8f5e9; /* Verde claro */
+    color: #2e7d32; /* Verde escuro */
+}
+
+.contagem-partida {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    min-width: 20px; /* Garante espaço */
+}
+
+/* ================================
+   5. ANIMAÇÕES DE FLASH (VERDE/VERMELHO)
+   ================================ */
+
+/* Animação Verde (Adicionar) */
+@keyframes flashGreen {
+    0% { transform: scale(1); background-color: #f4f7f6; }
+    30% { transform: scale(1.1); background-color: #c8e6c9; }
+    100% { transform: scale(1); background-color: #f4f7f6; }
+}
+.flash-effect {
+    animation: flashGreen 0.4s ease-out;
+}
+
+/* Animação Vermelha (Subtrair) */
+@keyframes flashRed {
+    0% { transform: scale(1); background-color: #f4f7f6; }
+    30% { transform: scale(1.1); background-color: #ffcdd2; }
+    100% { transform: scale(1); background-color: #f4f7f6; }
+}
+.flash-effect-red {
+    animation: flashRed 0.4s ease-out;
+}
+
+
+/* ================================
+   6. RESPONSIVIDADE (MOBILE)
+   ================================ */
+
+/* Para telas menores que 700px */
+@media (max-width: 700px) {
+    .logo-container {
+        padding: 15px;
+    }
+    .titulo {
+        font-size: 1.8rem;
+    }
+    .container-principal {
+        padding: 20px 10px 20px 10px; /* Reduz o padding */
+        gap: 20px;
+    }
+}
+
+/* ================================
+   7. MENU HAMBÚRGUER E MODAL
+   ================================ */
+
+/* --- O Ícone do Menu --- */
+.btn-menu {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-menu:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-menu svg {
+    display: block; /* Remove espaço extra do SVG */
+}
+
+/* --- O Fundo Escuro (Overlay) --- */
+.modal-overlay {
+    position: fixed; /* Fica por cima de tudo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    
+    /* Centraliza o conteúdo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Começa escondido */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000; /* Garante que fique por cima de tudo */
+}
+
+/* --- Classe 'active' que o JS vai adicionar --- */
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* --- O Painel Branco --- */
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    position: relative; /* Para o botão de fechar */
+    
+    /* MUDANÇA: Evita corte vertical e permite rolagem */
+    max-height: 85vh; /* Altura máxima de 85% da tela */
+    overflow-y: auto; /* Adiciona scroll se passar disso */
+    
+    /* Efeito de "zoom" ao aparecer */
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-titulo {
+    font-size: 1.8rem;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* --- Estatísticas (Gerado pelo JS) --- */
+#stats-content p {
+    font-size: 1.1rem;
+    color: #555;
+    background-color: #f4f7f6;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    /* Adiciona transição para o destaque */
+    transition: all 0.3s ease;
+    border: 1px solid transparent; /* Evita "pulo" */
+}
+
+/* Título geral das estatísticas */
+#stats-content h3 {
+    font-size: 1.3rem;
+    color: #0D47A1; /* AZUL */
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* --- NOVOS ESTILOS DO MODAL (GRID) --- */
+
+.stats-header-block {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px dashed #eee;
+}
+
+.stats-header-block h4 {
+    margin: 0;
+    color: #777;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.big-total {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #333;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+/* Os quadrados coloridos do modal */
+.stat-box {
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-box.blue {
+    background: linear-gradient(135deg, #1565C0, #0D47A1);
+}
+
+.stat-box.green {
+    background: linear-gradient(135deg, #43A047, #2E7D32);
+}
+
+.stat-box span {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.stat-box h3 {
+    color: rgba(255,255,255,0.9) !important; /* Força branco */
+    font-size: 0.9rem !important;
+    margin: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-box p {
+    background: none !important; /* Remove fundo cinza padrão */
+    border: none !important;
+    padding: 5px 0 0 0 !important;
+    margin: 0 !important;
+    color: white !important;
+    font-size: 1.2rem !important;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+
+/* Item vencedor na lista */
+#stats-content p.top-local-item {
+    background-color: #FFF8E1; /* Um amarelo/dourado bem claro */
+    color: #333;
+    font-weight: 600;
+    border: 1px solid #FFD700;
+}
+
+/* Botão de Reset */
+.btn-reset {
+    background-color: transparent;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.btn-reset:hover {
+    background-color: #ffebee;
+    border-color: #c62828;
+}
+
+/* --- Botão de Fechar (X) --- */
+.btn-fechar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 2.5rem;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.btn-fechar-modal:hover {
+    color: #333;
+}
+
+/* ================================
+   6. RESPONSIVIDADE (MOBILE)
+   ================================ */
+
+/* Para telas menores que 700px */
+@media (max-width: 700px) {
+    .logo-container {
+        padding: 15px;
+    }
+    .titulo {
+        font-size: 1.8rem;
+    }
+    .container-principal {
+        /* MUDANÇA: Aumentei o padding lateral de 10px para 20px */
+        padding: 20px 20px 40px 20px; 
+        gap: 20px;
+    }
+
+    .btn-menu {
+        right: 15px;
+    }
+    /* No celular, empilha as estatísticas */
+    .stats-grid {
+        grid-template-columns: 1fr; 
+    }
+    
+    /* MUDANÇA: Ajuste dos cards para não "vazarem" a tela */
+    .amigo-card {
+        min-width: 0; /* Remove a trava de 300px */
+        width: 100%; /* Ocupa o espaço disponível respeitando a margem */
+    }
+
+    /* NOVO: Ajuste do Modal no celular para ter margem */
+    .modal-content {
+        width: calc(100% - 40px); /* 100% da tela menos 40px (20px de cada lado) */
+        padding: 20px; /* Um pouco menos de padding interno no celular */
+        max-height: 85vh; /* Garante que não corte em cima/em baixo */
+    }
+}
+
+/* ================================
+   8. RODAPÉ
+   ================================ */
+
+.site-footer-final {
+    text-align: center;
+    /* padding: 0px (cima) 20px (lados) 40px (baixo) 20px (lados)
+      O espaço de 40px *acima* dele já é dado pelo container-principal
+    */
+    padding: 0px 20px 40px 20px; 
+    max-width: 1600px; /* Alinha com o container principal */
+    margin: 0 auto; /* Centraliza */
+}
+
+.site-footer-final p {
+    color: #a0a0a0; /* Um cinza claro, mas legível */
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0;
+}
