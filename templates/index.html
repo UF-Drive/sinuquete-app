@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <!-- Configuração para telas de celular (responsividade) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- TÍTULO DA ABA (E DO ZAP) -->
+    <title>Sinuquete 🎱</title>
+
+    <!-- ===================================================== -->
+    <!--    CONFIGURAÇÃO DE COMPARTILHAMENTO (WHATSAPP)        -->
+    <!-- ===================================================== -->
+    <meta property="og:type" content="website">
+    
+    <!-- Título que aparece em negrito -->
+    <meta property="og:title" content="Sinuquete 🎱 - Controle de Gastos">
+    
+    <!-- A mensagemzinha embaixo do título -->
+    <meta property="og:description" content="A ferramenta oficial para controlar os falidos e os mão de vaca. Clica aí pra ver quem tá ganhando!">
+    
+    <!-- A Imagem (O Python vai gerar o link completo pra você) -->
+    <meta property="og:image" content="{{ request.url_root }}static/img/bola8.webp">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+    <!-- ===================================================== -->
+
+    <link rel="icon" type="image/webp" href="/static/img/bola8.webp">
+
+    <!-- Configurações para parecer um App Nativo no celular -->
+    <meta name="theme-color" content="#0D47A1"> <!-- Cor da barra do Android -->
+    <meta name="apple-mobile-web-app-capable" content="yes"> <!-- Modo tela cheia no iPhone -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Sinuquete">
+
+    <!-- Importação dos CSS modularizados -->
+    <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/cards.css">
+    <link rel="stylesheet" href="/static/css/modal.css">
+    <link rel="stylesheet" href="/static/css/animations.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="logo-container">
+            <img src="/static/img/bola8.webp" alt="Logo Sinuquete" class="logo-img">
+            <h1 class="titulo">Sinuquete</h1>
+        </div>
+
+        <button type="button" class="btn-menu" id="openMenuBtn" aria-label="Abrir menu de estatísticas">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+        </button>
+    </header>
+
+    <main class="container-principal">
+        
+        <!-- Loop gerado pelo Python (Jinja2) para criar os cards -->
+        {% for amigo in amigos %}
+        <article class="amigo-card {{ amigo.css_class }}">
+            <h2 class="nome-amigo">
+                {{ amigo.nome }} <span class="trophy-icon">🏆</span>
+            </h2>
+            
+            <p class="total-gasto">Total: R$ 0,00</p>
+            
+            <div class="botoes-local" data-amigo="{{ amigo.id }}">
+                {% for local in locais %}
+                <button type="button" class="btn-local" data-preco="{{ local.preco }}">
+                    {{ local.nome }}
+                </button>
+                {% endfor %}
+            </div>
+            
+            <div class="preco-local" id="preco-{{ amigo.id }}"></div>
+            
+            <div class="controle-partida">
+                <button type="button" class="btn-acao btn-menos">-</button>
+                <span class="contagem-partida">1</span>
+                <button type="button" class="btn-acao btn-mais">+</button>
+            </div>
+        </article>
+        {% endfor %}
+        
+    </main>
+
+    <footer class="site-footer-final">
+        <p>Sinuquete © 2025 &nbsp;·&nbsp; Um projeto do seu grupo de sinuca</p>
+    </footer>
+
+    <script src="/static/js/script.js"></script>
+
+    <!-- Modal de Estatísticas -->
+    <div class="modal-overlay" id="statsModal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <button type="button" class="btn-fechar-modal" id="closeMenuBtn" aria-label="Fechar modal">&times;</button>
+            <h2 id="modal-title" class="modal-titulo">Estatísticas</h2>
+            <div id="stats-content"></div>
+        </div>
+    </div>
+
+</body>
+</html>

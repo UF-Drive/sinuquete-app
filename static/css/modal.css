@@ -1,0 +1,181 @@
+/* ================================
+   MODAL E ESTATÍSTICAS
+   ================================ */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-titulo {
+    font-size: 1.8rem;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Botão Fechar */
+.btn-fechar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 2.5rem;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.btn-fechar-modal:hover { color: #333; }
+
+/* --- Conteúdo das Estatísticas --- */
+
+#stats-content p {
+    font-size: 1.1rem;
+    color: #555;
+    background-color: #f4f7f6;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+#stats-content h3 {
+    font-size: 1.3rem;
+    color: #0D47A1;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.stats-header-block {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px dashed #eee;
+}
+
+.stats-header-block h4 {
+    margin: 0;
+    color: #777;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.big-total {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #333;
+}
+
+/* Grid dos Destaques */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-box {
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-box.blue { background: linear-gradient(135deg, #1565C0, #0D47A1); }
+.stat-box.green { background: linear-gradient(135deg, #43A047, #2E7D32); }
+
+.stat-box span { font-size: 2rem; margin-bottom: 5px; }
+
+.stat-box h3 {
+    color: rgba(255,255,255,0.9) !important;
+    font-size: 0.9rem !important;
+    margin: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-box p {
+    background: none !important;
+    border: none !important;
+    padding: 5px 0 0 0 !important;
+    margin: 0 !important;
+    color: white !important;
+    font-size: 1.2rem !important;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+#stats-content p.top-local-item {
+    background-color: #FFF8E1;
+    color: #333;
+    font-weight: 600;
+    border: 1px solid #FFD700;
+}
+
+.btn-reset {
+    background-color: transparent;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.btn-reset:hover {
+    background-color: #ffebee;
+    border-color: #c62828;
+}
+
+/* Responsividade do Modal */
+@media (max-width: 700px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .modal-content {
+        width: calc(100% - 40px);
+        padding: 20px;
+    }
+}

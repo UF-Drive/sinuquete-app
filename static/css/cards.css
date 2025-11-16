@@ -1,0 +1,162 @@
+/* ================================
+   CONTAINER PRINCIPAL
+   ================================ */
+
+.container-principal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 40px 20px 40px 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* ================================
+   CARD DE AMIGO
+   ================================ */
+
+.amigo-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+    min-width: 300px;
+    max-width: 350px;
+    flex-grow: 1;
+    padding: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 3px solid transparent;
+    border-top-width: 6px;
+    transition: all 0.2s ease-out;
+}
+
+.amigo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Cores Personalizadas */
+.card-augusto { border-top-color: #CE93D8; }
+.card-daniel { border-top-color: #7B1FA2; }
+.card-fernanda { border-top-color: #556B2F; }
+.card-ze { border-top-color: #4169E1; }
+.card-rafael { border-top-color: #212121; }
+
+/* Top Spender (Vence a cor) */
+.amigo-card.top-spender {
+    border-color: #FFD700;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+}
+
+/* Elementos Internos */
+.nome-amigo {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.nome-amigo .trophy-icon {
+    display: none;
+    font-size: 1.2rem;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.amigo-card.top-spender .nome-amigo .trophy-icon {
+    display: inline;
+}
+
+.total-gasto {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1565C0;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.botoes-local {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-local {
+    border: 2px solid #0D47A1;
+    background: transparent;
+    color: #0D47A1;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-local:hover { background: #e3f2fd; }
+.btn-local:active { transform: scale(0.95); }
+.btn-local.selecionado {
+    background: #0D47A1;
+    color: white;
+}
+
+.preco-local {
+    min-height: 1.2em;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.controle-partida {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-acao {
+    background: #eee;
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn-acao:active { transform: scale(0.9); }
+.btn-menos:hover { background: #ffebee; color: #c62828; }
+.btn-mais:hover { background: #e8f5e9; color: #2e7d32; }
+
+.contagem-partida {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    min-width: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+    .container-principal {
+        padding: 20px 20px 40px 20px;
+        gap: 20px;
+    }
+    .amigo-card {
+        min-width: 0;
+        width: 100%;
+    }
+}

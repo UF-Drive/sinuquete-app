@@ -1,0 +1,81 @@
+/* ================================
+   HEADER "MAGNÍFICO"
+   ================================ */
+
+.site-header {
+    width: 100%;
+    background: linear-gradient(180deg, #1565C0 0%, #0D47A1 100%);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+/* Efeito Glossy */
+.site-header::after {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -30%;
+    width: 160%;
+    height: 160%;
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.0) 50%
+    );
+    transform: rotate(25deg);
+    pointer-events: none;
+}
+
+.logo-container {
+    max-width: 1600px; 
+    margin: 0 auto;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-img {
+    height: 40px;
+    width: 40px;
+    margin-right: 15px;
+}
+
+.titulo {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Botão Menu Hambúrguer */
+.btn-menu {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-menu:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-menu svg {
+    display: block;
+}
+
+/* Responsividade do Header */
+@media (max-width: 700px) {
+    .logo-container { padding: 15px; }
+    .titulo { font-size: 1.8rem; }
+    .btn-menu { right: 15px; }
+}

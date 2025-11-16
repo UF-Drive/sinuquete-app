@@ -7,6 +7,35 @@ const API_URL = window.location.port === '5500'
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- NOVO: FRASES ALEATÓRIAS DO RODAPÉ ---
+    const frasesRodape = [
+        "Equipe alinhada (com a caçapa errada)",
+        "Falir é fácil. Difícil é acertar uma tacada boa",
+        "Taco firme, caixa fraco",
+        "Encaçapando a falência desde sempre",
+        "Tudo indo pro buraco (inclusive a gente)",
+        "A equipe faz pontos; nós fazemos dívidas",
+        "A bola cai e o saldo também",
+        "A mesa chama, o dinheiro foge",
+        "Jogamos por esporte; falimos por hábito",
+        "O pano é verde; o nosso salário, não"
+    ];
+
+    function sortearFrase() {
+        const elementoP = document.querySelector('.site-footer-final p');
+        if (elementoP) {
+            const indice = Math.floor(Math.random() * frasesRodape.length);
+            const fraseEscolhida = frasesRodape[indice];
+            // Mantém o Copyright e adiciona a frase sorteada
+            elementoP.innerHTML = `Sinuquete © 2025 &nbsp;·&nbsp; ${fraseEscolhida}`;
+        }
+    }
+    
+    // Roda o sorteio assim que a página abre
+    sortearFrase();
+    // ------------------------------------------
+
+
     // Estado local para interface rápida
     const amigoStates = {};
     const localStats = { 'CT': 0, 'Artes': 0, 'Onofre': 0, 'Ed. Física': 0 };
