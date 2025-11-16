@@ -3,21 +3,21 @@ from flask_cors import CORS
 import database
 import unicodedata
 
-# --- MUDANÇA CRÍTICA AQUI ---
-# O comando abaixo agora roda SEMPRE, seja no seu PC ou no Render.
+# --- CRIAÇÃO DO BANCO ---
 # Isso garante que o banco e as tabelas sejam criados antes do site ligar.
 database.init_db()
 # ----------------------------
 
-app = Flask(__name__, static_url_path='', static_folder='.')
+# O Flask vai achar as pastas 'static' e 'templates' sozinho.
+app = Flask(__name__)
 CORS(app)
 
-# Função para transformar "Zé" em "ze"
+# Função para transformar "Zé" em "ze", "Augusto" em "augusto"
 def slugify(texto):
     return ''.join(c for c in unicodedata.normalize('NFD', texto)
                   if unicodedata.category(c) != 'Mn').lower()
 
-# --- CONFIGURAÇÕES DO JOGO ---
+# --- CONFIGURAÇÕES DO JOGO (Fácil de editar aqui!) ---
 AMIGOS_LISTA = ['Augusto', 'Daniel', 'Fernanda', 'Zé', 'Rafael']
 
 LOCAIS_PRECOS = [
@@ -27,17 +27,24 @@ LOCAIS_PRECOS = [
     {'nome': 'Ed. Física', 'preco': 2.00}
 ]
 
-# Rota Principal
+# Rota Principal - Entrega o HTML
 @app.route('/')
 def home():
+    # Prepara os dados para o HTML
     amigos_dados = []
     for nome in AMIGOS_LISTA:
         amigos_dados.append({
             'nome': nome,
-            'id': slugify(nome),
-            'css_class': f'card-{slugify(nome)}'
+            'id': slugify(nome), # gera "ze", "daniel"...
+            'css_class': f'card-{slugify(nome)}' # gera "card-ze"...
         })
+    
+    # Envia tudo para o template renderizar
     return render_template('index.html', amigos=amigos_dados, locais=LOCAIS_PRECOS)
+
+# ===========================
+# API (O "Backend" puro)
+# ===========================
 
 # API - Totais
 @app.route('/api/totais', methods=['GET'])
@@ -60,5 +67,5 @@ def resetar_tudo():
     return jsonify({'mensagem': 'Tudo limpo!'})
 
 if __name__ == '__main__':
-    # A linha init_db() foi removida daqui e colocada no topo
-    app.run(debug=True, port=5000)
+    # O init_db() foi movido para o topo do arquivo
+    app.run(debug=True, port=5000, use_reloader=False)
